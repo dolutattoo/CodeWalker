@@ -1,4 +1,4 @@
-﻿namespace CodeWalker.World
+namespace CodeWalker.World
 {
     partial class SettingsForm
     {
@@ -47,6 +47,8 @@
             this.KeyBindButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.AdvancedTabPage = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.defaultPosTextBox = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.CollisionCacheSizeUpDown = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
@@ -296,6 +298,8 @@
             // 
             // AdvancedTabPage
             // 
+            this.AdvancedTabPage.Controls.Add(this.label24);
+            this.AdvancedTabPage.Controls.Add(this.defaultPosTextBox);
             this.AdvancedTabPage.Controls.Add(this.label22);
             this.AdvancedTabPage.Controls.Add(this.CollisionCacheSizeUpDown);
             this.AdvancedTabPage.Controls.Add(this.label23);
@@ -333,6 +337,25 @@
             this.AdvancedTabPage.TabIndex = 1;
             this.AdvancedTabPage.Text = "Advanced";
             this.AdvancedTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 369);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(83, 13);
+            this.label24.TabIndex = 83;
+            this.label24.Text = "Default position:";
+            // 
+            // defaultPosTextBox
+            // 
+            this.defaultPosTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.defaultPosTextBox.Location = new System.Drawing.Point(110, 366);
+            this.defaultPosTextBox.Name = "defaultPosTextBox";
+            this.defaultPosTextBox.Size = new System.Drawing.Size(271, 20);
+            this.defaultPosTextBox.TabIndex = 82;
+            this.defaultPosTextBox.TextChanged += new System.EventHandler(this.DefaultPos_TextChanged);
             // 
             // label22
             // 
@@ -883,5 +906,7 @@
         private System.Windows.Forms.NumericUpDown TextureCacheSizeUpDown;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.CheckBox MouseInvertCheckBox;
+        private System.Windows.Forms.TextBox defaultPosTextBox;
+        private System.Windows.Forms.Label label24;
     }
 }

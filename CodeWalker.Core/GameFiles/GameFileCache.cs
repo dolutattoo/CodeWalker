@@ -69,6 +69,7 @@ namespace CodeWalker.GameFiles
         public bool EnableDlc { get; set; } = false;//true;//
         public bool EnableMods { get; set; } = false;
         public bool EnableCayoWater { get; set; } = false;
+        public string DefaultPos { get; set; } = "0,0,0";
 
         public List<string> DlcPaths { get; set; } = new List<string>();
         public List<RpfFile> DlcActiveRpfs { get; set; } = new List<RpfFile>();
@@ -144,7 +145,7 @@ namespace CodeWalker.GameFiles
 
 
 
-        public GameFileCache(long size, double cacheTime, string folder, string dlc, bool mods, string excludeFolders, bool cayoWater)
+        public GameFileCache(long size, double cacheTime, string folder, string dlc, bool mods, string excludeFolders, bool cayoWater, string defaultPos)
         {
             mainCache = new Cache<GameFileCacheKey, GameFile>(size, cacheTime);//2GB is good as default
             SelectedDlc = dlc;
@@ -153,6 +154,7 @@ namespace CodeWalker.GameFiles
             GTAFolder = folder;
             ExcludeFolders = excludeFolders;
             EnableCayoWater = cayoWater;
+            DefaultPos = defaultPos;
         }
 
 

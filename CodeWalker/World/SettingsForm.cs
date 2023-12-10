@@ -1,4 +1,4 @@
-﻿using CodeWalker.Properties;
+using CodeWalker.Properties;
 using CodeWalker.Utils;
 using System;
 using System.Collections.Generic;
@@ -82,6 +82,7 @@ namespace CodeWalker.World
             GeometryCacheSizeUpDown.Value = Math.Min(Math.Max(Settings.Default.GPUGeometryCacheSize / 1048576, GeometryCacheSizeUpDown.Minimum), GeometryCacheSizeUpDown.Maximum);
             TextureCacheSizeUpDown.Value = Math.Min(Math.Max(Settings.Default.GPUTextureCacheSize / 1048576, TextureCacheSizeUpDown.Minimum), TextureCacheSizeUpDown.Maximum);
             CollisionCacheSizeUpDown.Value = Math.Min(Math.Max(Settings.Default.GPUBoundCompCacheSize / 1048576, CollisionCacheSizeUpDown.Minimum), CollisionCacheSizeUpDown.Maximum);
+            defaultPosTextBox.Text = Settings.Default.DefaultPos;
         }
 
 
@@ -320,6 +321,11 @@ namespace CodeWalker.World
         private void CollisionCacheSizeUpDown_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.GPUBoundCompCacheSize = (long)CollisionCacheSizeUpDown.Value * 1048576;
+        }
+
+        private void DefaultPos_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Default.DefaultPos = defaultPosTextBox.Text;
         }
     }
 }

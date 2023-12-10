@@ -15,6 +15,8 @@ using CodeWalker.Rendering;
 using CodeWalker.GameFiles;
 using CodeWalker.Properties;
 using CodeWalker.Tools;
+using System.Windows.Media;
+using System.Globalization;
 
 namespace CodeWalker
 {
@@ -347,6 +349,22 @@ namespace CodeWalker
                 {
                     icon.LoadTexture(device, LogError);
                 }
+            }
+
+            string startPos = Settings.Default.DefaultPos;
+
+            if (startPos != null)
+            {
+                string[] splitCoords = startPos.Split(',');
+                int length = splitCoords.Length;
+
+                float x = 0, y = 0, z = 0;
+
+                if (length > 0) float.TryParse(splitCoords[0].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out x);
+                if (length > 1) float.TryParse(splitCoords[1].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out y);
+                if (length > 2) float.TryParse(splitCoords[2].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out z);
+
+                prevworldpos = new Vector3(x, y, z);
             }
 
             camera.FollowEntity = camEntity;
@@ -7738,6 +7756,12 @@ namespace CodeWalker
         {
             SubtitleTimer.Enabled = false;
             SubtitleLabel.Visible = false;
+        }
+
+        private void SetAsDefaultPos_Click(object sender, EventArgs e)
+        {
+            Vector3 currPos = camera.Position;
+            Settings.Default.DefaultPos = string.Format("{0}, {1}, {2}", currPos.X, currPos.Y, currPos.Z);
         }
     }
 
