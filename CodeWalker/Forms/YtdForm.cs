@@ -76,7 +76,8 @@ namespace CodeWalker.Forms
                 ListViewItem lvi = TexturesListView.Items.Add(tex.Name);
                 lvi.ToolTipText = tex.Name;
                 lvi.Tag = tex;
-                lvi.SubItems.Add(tex.Width.ToString() + " x " + tex.Height.ToString());
+                lvi.SubItems.Add(tex.Width.ToString() + " x" + tex.Height.ToString());
+                lvi.SubItems.Add(tex.Format.ToString().Replace("D3DFMT_", ""));
             }
 
             if (TexturesListView.Items.Count > 0)

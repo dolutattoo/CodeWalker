@@ -1,4 +1,4 @@
-﻿namespace CodeWalker.Forms
+namespace CodeWalker.Forms
 {
     partial class YtdForm
     {
@@ -54,6 +54,7 @@
             this.TexturesListView = new System.Windows.Forms.ListView();
             this.TextureNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TextureSizeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TextureFormatColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
             this.SelTextureNameTextBox = new System.Windows.Forms.TextBox();
             this.TextureTabControl = new System.Windows.Forms.TabControl();
@@ -315,7 +316,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TexturesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.TextureNameColumnHeader,
-            this.TextureSizeColumnHeader});
+            this.TextureSizeColumnHeader,
+            this.TextureFormatColumnHeader});
             this.TexturesListView.FullRowSelect = true;
             this.TexturesListView.HideSelection = false;
             this.TexturesListView.Location = new System.Drawing.Point(3, 3);
@@ -335,7 +337,12 @@
             // TextureSizeColumnHeader
             // 
             this.TextureSizeColumnHeader.Text = "Size";
-            this.TextureSizeColumnHeader.Width = 72;
+            this.TextureSizeColumnHeader.Width = 68;
+            // 
+            // TextureFormatColumnHeader
+            // 
+            this.TextureFormatColumnHeader.Text = "Format";
+            this.TextureFormatColumnHeader.Width = 75;
             // 
             // label5
             // 
@@ -579,6 +586,7 @@
         private System.Windows.Forms.ListView TexturesListView;
         private System.Windows.Forms.ColumnHeader TextureNameColumnHeader;
         private System.Windows.Forms.ColumnHeader TextureSizeColumnHeader;
+        private System.Windows.Forms.ColumnHeader TextureFormatColumnHeader;
         private System.Windows.Forms.Panel SelTexturePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox SelTextureZoomCombo;
