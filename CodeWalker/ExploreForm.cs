@@ -3718,6 +3718,11 @@ namespace CodeWalker
         private void ExploreForm_Load(object sender, EventArgs e)
         {
             Init();
+
+            // Enable drag-and-drop on MainTreeView for opening folders
+            MainTreeView.AllowDrop = true;
+            MainTreeView.DragEnter += MainTreeView_DragEnter;
+            MainTreeView.DragDrop += MainTreeView_DragDrop;
         }
 
         private void ExploreForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -4542,9 +4547,79 @@ namespace CodeWalker
         {
             CopyToModsFolder();
         }
+
+        private void MainTreeView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if ((files != null) && (files.Length > 0))
+                {
+                    // Vérifier si c'est un dossier
+                    if (Directory.Exists(files[0]))
+                    {
+                        e.Effect = DragDropEffects.Link;
+                        return;
+                    }
+                }
+            }
+            e.Effect = DragDropEffects.None;
+        }
+
+        private void MainTreeView_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if ((files == null) || (files.Length <= 0)) return;
+
+                foreach (var file in files)
+                {
+                    if (Directory.Exists(file))
+                    {
+                        var folderPath = file;
+                        if (!folderPath.EndsWith("\\")) folderPath += "\\";
+
+                        // Vérifier si le dossier n'est pas déjà ouvert
+                        bool alreadyOpen = false;
+                        foreach (var folder in ExtraRootFolders)
+                        {
+                            if (folder.FullPath == folderPath)
+                            {
+                                alreadyOpen = true;
+                                // Naviguer vers le dossier déjà ouvert
+                                Invoke(new Action(() =>
+                                {
+                                    MainTreeView.SelectedNode = folder.TreeNode;
+                                }));
+                                break;
+                            }
+                        }
+
+                        if (alreadyOpen) continue;
+
+                        // Ouvrir le nouveau dossier (même logique que OpenFolder)
+                        var root = new MainTreeFolder();
+                        root.FullPath = folderPath;
+                        root.Path = folderPath;
+                        root.Name = Path.GetFileName(Path.GetDirectoryName(folderPath));
+                        root.IsExtraFolder = true;
+                        ExtraRootFolders.Add(root);
+
+                        Task.Run(() =>
+                        {
+                            RefreshMainTreeViewRoot(root);
+
+                            Invoke(new Action(() =>
+                            {
+                                MainTreeView.SelectedNode = root.TreeNode;
+                            }));
+                        });
+                    }
+                }
+            }
+        }
     }
-
-
 
     public class MainTreeFolder
     {
